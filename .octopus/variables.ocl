@@ -1,0 +1,33 @@
+variable "Octopus.Aws.Regions" {
+    value "us-east-2" {
+        action = ["create-namespace-if-not-exists"]
+    }
+
+    value "us-east-2" {
+        action = ["create-namespace-if-not-exists"]
+    }
+}
+
+variable "Project.Worker.Pool" {
+    type = "WorkerPool"
+
+    value "aws-worker-pool" {}
+}
+
+variable "spec:template:spec:containers:0:env:1:value" {
+    value "#{Octopub.Yaml.Database.Server.Name}" {
+        action = ["deploy-audit-deployment"]
+    }
+}
+
+variable "spec:template:spec:containers:0:env:2:value" {
+    value "3306" {
+        action = ["deploy-audit-deployment"]
+    }
+}
+
+variable "spec:template:spec:containers:0:env:3:value" {
+    value "#{Octopub.Yaml.Database.Name}" {
+        action = ["deploy-audit-deployment"]
+    }
+}
