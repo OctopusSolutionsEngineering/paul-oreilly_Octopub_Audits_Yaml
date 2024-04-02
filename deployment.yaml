@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auditservice
-          image: octopussamples/octopub-audit-microservice-mysql
+          image: octopussamples/octopub-audit-microservice-mysql:#{Project.Container.Tag}
           ports:
             - name: http-audit
               containerPort: 10000
