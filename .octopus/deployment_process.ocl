@@ -35,59 +35,24 @@ step "create-namespace-if-not-exists" {
 }
 
 step "deploy-audit-deployment" {
-    name = "Deploy audit deployment"
-    properties = {
-        Octopus.Action.TargetRoles = "demo-k8s-cluster"
-    }
-
-    action {
-        action_type = "Octopus.KubernetesDeployRawYaml"
-        properties = {
-            Octopus.Action.GitRepository.Source = "External"
-            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
-            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
-            Octopus.Action.KubernetesContainers.CustomResourceYamlFileName = "manifests/octopub-audits-mysql.yaml"
-            Octopus.Action.KubernetesContainers.Namespace = "#{Octopub.Yaml.Cluster.Namespace}"
-            Octopus.Action.Package.JsonConfigurationVariablesTargets = "**/*.{yml,yaml}"
-            Octopus.Action.Script.ScriptSource = "GitRepository"
-        }
-        worker_pool_variable = ""
-
-        git_dependencies {
-            default_branch = "main"
-            file_path_filters = ["manifests/octopub-audits-mysql.yaml"]
-            git_credential_id = "GitCredentials-922"
-            git_credential_type = "Library"
-            repository_uri = "https://github.com/OctopusSolutionsEngineering/Octopub.git"
-        }
-    }
-}
-
-step "deploy-audit-service" {
     name = "Deploy audit service"
     properties = {
         Octopus.Action.TargetRoles = "demo-k8s-cluster"
     }
 
-    action {
+    action "deploy-audit-service" {
         action_type = "Octopus.KubernetesDeployRawYaml"
         properties = {
-            Octopus.Action.GitRepository.Source = "External"
+            Octopus.Action.GitRepository.FilePathFilters = "*.yaml"
+            Octopus.Action.GitRepository.Source = "Project"
             Octopus.Action.Kubernetes.DeploymentTimeout = "180"
             Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
-            Octopus.Action.KubernetesContainers.CustomResourceYamlFileName = "manifests/octopub-audits-service.yaml"
+            Octopus.Action.KubernetesContainers.CustomResourceYamlFileName = "*.yaml"
             Octopus.Action.KubernetesContainers.Namespace = "#{Octopub.Yaml.Cluster.Namespace}"
             Octopus.Action.Package.JsonConfigurationVariablesTargets = "**/*.{yml,yaml}"
+            Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "GitRepository"
         }
         worker_pool_variable = ""
-
-        git_dependencies {
-            default_branch = "main"
-            file_path_filters = ["manifests/octopub-audits-service.yaml"]
-            git_credential_id = "GitCredentials-922"
-            git_credential_type = "Library"
-            repository_uri = "https://github.com/OctopusSolutionsEngineering/Octopub.git"
-        }
     }
 }
