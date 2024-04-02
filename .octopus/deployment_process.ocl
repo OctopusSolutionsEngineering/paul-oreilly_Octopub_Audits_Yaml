@@ -54,5 +54,16 @@ step "deploy-audit-deployment" {
             Octopus.Action.Script.ScriptSource = "GitRepository"
         }
         worker_pool_variable = ""
+
+        packages "octopub-audit-microservice-mysql" {
+            acquisition_location = "NotAcquired"
+            feed = "docker-hub"
+            package_id = "octopussamples/octopub-audit-microservice-mysql"
+            properties = {
+                Extract = "False"
+                Purpose = ""
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
