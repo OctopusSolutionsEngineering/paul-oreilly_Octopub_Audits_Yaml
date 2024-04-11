@@ -2,10 +2,6 @@ variable "Octopus.Aws.Regions" {
     value "us-east-2" {
         action = ["create-namespace-if-not-exists"]
     }
-
-    value "us-east-2" {
-        action = ["create-namespace-if-not-exists"]
-    }
 }
 
 variable "Project.Worker.Pool" {
@@ -34,4 +30,12 @@ variable "spec:template:spec:containers:0:env:3:value" {
 
 variable "Project.Container.Tag" {
     value "#{Octopus.Action.Package[octopub-audit-microservice-mysql].PackageVersion}" {}
+}
+
+variable "Octopus.Azure.Account" {
+    type = "AzureAccount"
+
+    value "octopub-yaml" {
+        action = ["create-namespace-if-not-exists"]
+    }
 }
