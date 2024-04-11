@@ -4,30 +4,6 @@ variable "Octopus.Aws.Regions" {
     }
 }
 
-variable "Project.Worker.Pool" {
-    type = "WorkerPool"
-
-    value "aws-worker-pool" {}
-}
-
-variable "spec:template:spec:containers:0:env:1:value" {
-    value "#{Octopub.Yaml.Database.Server.Name}" {
-        action = ["deploy-audit-deployment"]
-    }
-}
-
-variable "spec:template:spec:containers:0:env:2:value" {
-    value "3306" {
-        action = ["deploy-audit-deployment"]
-    }
-}
-
-variable "spec:template:spec:containers:0:env:3:value" {
-    value "#{Octopub.Yaml.Database.Name}" {
-        action = ["deploy-audit-deployment"]
-    }
-}
-
 variable "Project.Container.Tag" {
     value "#{Octopus.Action.Package[octopub-audit-microservice-mysql].PackageVersion}" {}
 }
@@ -37,5 +13,29 @@ variable "Octopus.Azure.Account" {
 
     value "octopub-yaml" {
         action = ["create-namespace-if-not-exists"]
+    }
+}
+
+variable "Project.Worker.Pool" {
+    type = "WorkerPool"
+
+    value "azure-worker-pool" {}
+}
+
+variable "spec:template:spec:containers:0:env:1:value" {
+    value "#{Octopub.Yaml.Database.Server.Name}" {
+        action = ["deploy-audit-service"]
+    }
+}
+
+variable "spec:template:spec:containers:0:env:2:value" {
+    value "3306" {
+        action = ["deploy-audit-service"]
+    }
+}
+
+variable "spec:template:spec:containers:0:env:3:value" {
+    value "#{Octopub.Yaml.Database.Name}" {
+        action = ["deploy-audit-service"]
     }
 }
