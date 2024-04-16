@@ -1,9 +1,3 @@
-variable "Octopus.Aws.Regions" {
-    value "us-east-2" {
-        action = ["create-namespace-if-not-exists"]
-    }
-}
-
 variable "Project.Container.Tag" {
     value "#{Octopus.Action.Package[octopub-audit-microservice-mysql].PackageVersion}" {}
 }
