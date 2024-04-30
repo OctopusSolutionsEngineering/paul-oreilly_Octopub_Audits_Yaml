@@ -33,3 +33,7 @@ variable "spec:template:spec:containers:0:env:3:value" {
         action = ["deploy-audit-service"]
     }
 }
+
+variable "Project.Labels.Component" {
+    value "auditservice" {}
+}
