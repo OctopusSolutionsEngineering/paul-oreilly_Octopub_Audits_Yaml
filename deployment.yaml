@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: octopub-audit-deployment
+  name: #{Project.Deployment.Name}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: auditservice
+      component: #{Project.Labels.Component}
   template:
     metadata:
       labels:
-        component: auditservice
+        component: #{Project.Labels.Component}
     spec:
       containers:
         - name: auditservice
