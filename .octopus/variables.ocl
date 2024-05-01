@@ -37,3 +37,7 @@ variable "spec:template:spec:containers:0:env:3:value" {
 variable "Project.Labels.Component" {
     value "auditservice" {}
 }
+
+variable "Project.Deployment.Name" {
+    value "octopub-audit-deployment" {}
+}
