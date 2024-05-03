@@ -45,7 +45,7 @@ step "deploy-audit-deployment" {
         properties = {
             Octopus.Action.GitRepository.FilePathFilters = "*.yaml"
             Octopus.Action.GitRepository.Source = "Project"
-            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
+            Octopus.Action.Kubernetes.DeploymentTimeout = "360"
             Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
             Octopus.Action.Kubernetes.ServerSideApply.Enabled = "False"
             Octopus.Action.Kubernetes.ServerSideApply.ForceConflicts = "False"
