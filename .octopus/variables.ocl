@@ -2,14 +2,6 @@ variable "Project.Container.Tag" {
     value "#{Octopus.Action.Package[octopub-audit-microservice-mysql].PackageVersion}" {}
 }
 
-variable "Octopus.Azure.Account" {
-    type = "AzureAccount"
-
-    value "octopub-yaml" {
-        action = ["create-namespace-if-not-exists"]
-    }
-}
-
 variable "Project.Worker.Pool" {
     type = "WorkerPool"
 
@@ -40,4 +32,12 @@ variable "Project.Labels.Component" {
 
 variable "Project.Deployment.Name" {
     value "octopub-audit-deployment" {}
+}
+
+variable "Octopus.Azure.Account" {
+    type = "AzureAccount"
+
+    value "demo-octopus-app" {
+        action = ["create-namespace-if-not-exists"]
+    }
 }
